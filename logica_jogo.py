@@ -1,29 +1,22 @@
 import random as rd
+class dadosFuncionais:
+    @staticmethod
+    def gerarNumeros():
+        num1 = rd.randint(0,9)
+        num2 = rd.randint(0,9)
+        return num1, num2
 
+    @staticmethod
+    def selecionarOperador():
+        return rd.choice(["+","-","/","*"])
 
-num1 = rd.randint (0,9)
-num2 = rd.randint (0,9)
-
-operador = ["+","-","*","/"]
-op_escolinhdo = rd.choice(operador)
-
-if(op_escolinhdo == "+"):
-    res = num1 + num2
-
-elif(op_escolinhdo == "-"):
-    res = num1 - num2
-
-elif(op_escolinhdo == "*"):
-    res = num1 * num2
-
-else:
-    res = num1 / num2
-
-print(f"{num1} ? {num2} = {res}")
-
-resU=input("Qual o operador desta questão ?: ")
-
-if (resU != op_escolinhdo):
-    print("Você errou !")
-else:
-    print("PARABÉNS !")
+    @staticmethod
+    def calcularResultado(a,b,op):
+        if op == "+":
+            return a + b
+        elif op == "-":
+            return a - b
+        elif op == "*":
+            return a * b
+        elif op == "/":
+            return round(a/(b if b!=0 else 1),2)
