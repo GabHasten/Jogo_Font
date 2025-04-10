@@ -1,5 +1,9 @@
 import tkinter as tk
 from utilitarios import resetaTela,rodape
+from logica_jogo import dadosFuncionais
+num1,num2 = dadosFuncionais.gerarNumeros()
+operador = dadosFuncionais.selecionarOperador()
+resultado = dadosFuncionais.calcularResultado(num1,num2,operador)
 
 class TelaJogo:
     def __init__ (self,root):
@@ -28,11 +32,11 @@ class TelaJogo:
         numeros_frame.pack(pady=40)
 
         
-        tk.Label(numeros_frame, text="1", font=("Arial",32)).pack(side="left",padx=20)
+        tk.Label(numeros_frame, text=str(num1), font=("Arial",32)).pack(side="left",padx=20)
         tk.Label(numeros_frame, text="?", font=("Arial",32)).pack(side="left",padx=20)
-        tk.Label(numeros_frame, text="3", font=("Arial",32)).pack(side="left",padx=20)
+        tk.Label(numeros_frame, text=str(num2), font=("Arial",32)).pack(side="left",padx=20)
         tk.Label(numeros_frame, text="=", font=("Arial",32)).pack(side="left",padx=20)
-        tk.Label(numeros_frame, text="4", font=("Arial",32)).pack(side="left",padx=20)
+        tk.Label(numeros_frame, text=str(resultado), font=("Arial",32)).pack(side="left",padx=20)
 
         operacoes_frame = tk.Frame(self.root)
         operacoes_frame.pack(pady=30)
@@ -41,7 +45,7 @@ class TelaJogo:
             tk.Button(operacoes_frame, text=operacao, font=("Arial",16), width=5,height=2).pack(side="left",padx=10)
 
         rodape(self.root)
-
+        
 
     def pararJogo(self,root):
         root.running = False
