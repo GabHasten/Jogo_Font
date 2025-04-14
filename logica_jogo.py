@@ -1,6 +1,6 @@
 import random as rd
 from tkinter import messagebox
-from fim_jogo import FinalJogo
+#from fim_jogo import FinalJogo
 
 class DadosOperacionais:
     @staticmethod
@@ -15,13 +15,15 @@ class DadosOperacionais:
             root.wait_variable(root.continua_jogo)
 
             if not root.running:
-                massagebox.showinfo("Jogo  encerrado","Você saiu do jogo")
+                messagebox.showinfo("Jogo  encerrado","Você saiu do jogo")
+                root.destroy()
                 break
+                
 
             contador +=1
 
         if contador > max_partidas:
-            massagebox.showinfo("Fim do jogo",f"Parabéns! Você marcou {root.pontos} pontos")
+            messagebox.showinfo("Fim do jogo",f"Parabéns! Você marcou {root.pontos} pontos")
 
     @staticmethod
     def iniciaPartida(count,max):
@@ -32,7 +34,7 @@ class DadosOperacionais:
         return score
 
 
-class dadosFuncionais:
+class DadosFuncionais:
     @staticmethod
     def gerarNumeros():
         num1 = rd.randint(0,9)
