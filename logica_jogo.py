@@ -1,4 +1,37 @@
 import random as rd
+from tkinter import messagebox
+from fim_jogo import FinalJogo
+
+class DadosOperacionais:
+    @staticmethod
+    def iniciaJogo(tela_jogo_instancia,root):
+        contador = 1
+        max_partidas = 20
+        root.pontos = 0
+
+        while contador <= max_partidas:
+            tela_jogo_instancia.frameTelaJogo(root,contador,root.pontos)
+            root.continua_jogo.set(False)
+            root.wait_variable(root.continua_jogo)
+
+            if not root.running:
+                massagebox.showinfo("Jogo  encerrado","Você saiu do jogo")
+                break
+
+            contador +=1
+
+        if contador > max_partidas:
+            massagebox.showinfo("Fim do jogo",f"Parabéns! Você marcou {root.pontos} pontos")
+
+    @staticmethod
+    def iniciaPartida(count,max):
+        return count,max
+    
+    @staticmethod
+    def iniciaPontos(score):
+        return score
+
+
 class dadosFuncionais:
     @staticmethod
     def gerarNumeros():
