@@ -1,5 +1,7 @@
 import tkinter as tk
-from utilitarios import resetaTela
+import time
+from tkinter import messagebox
+from utilitarios import resetaTela, rodape
 from logica_jogo import DadosFuncionais
 
 class TelaJogo:
@@ -10,9 +12,23 @@ class TelaJogo:
         self.num2 = None
         self.resultado = None
 
+        self.root.running = True
+        self.root.start_time = time.time()
+        self.root.pontos = 0
+        self.root.acertos = 0
+        self.root.continua_jogo = tk.BooleanVar(value=False)
+
+        self.tempo_label = None
+        self.time_id = None
+        self.pause = False
+
+        self.iniciaTempo =0
+    
+
     def frameTelaJogo(self, root, partida_atual, pontos):  
         resetaTela(root)
         self.root.title("The Math Game")
+        self.iniciaTempo = time.time() #contador de ponto
 
         self.num1, self.num2 = DadosFuncionais.gerarNumeros()
         self.operador_correto = DadosFuncionais.selecionarOperador()
@@ -27,8 +43,13 @@ class TelaJogo:
         tk.Label(cabecalho, text="Pontuação:").grid(row=0, column=2, padx=10)
         tk.Label(cabecalho, text=str(pontos)).grid(row=0, column=3, padx=10)
 
+        tk.Label(cabecalho, text="Tempo:").grid(row=0, column=4, padx=10)
+        self.tempo_label = tk.Label(cabecalho, text="00:00")
+        self.tempo_label.grid(row=0, column=5, padx=10)
+
         botao_parar = tk.Button(cabecalho, text="Parar", command=self.pararJogo)
         botao_parar.grid(row=0, column=4, padx=10)
+
 
         numeros_frame = tk.Frame(root)
         numeros_frame.pack(pady=40)
@@ -53,22 +74,34 @@ class TelaJogo:
                 command=lambda op=operador_real: self.processarResposta(op)
             )
             botao.pack(side="left", padx=10)
+        
+        rodape(self.root)
 
-        rodape = tk.Label(
-            root,
-            text="Desenvolvido por: \nJoão Silva e Maria Souza (Senai Betim 2025)",
-            font=("Arial", 8)
-        )
-        rodape.pack(side="bottom", pady=10)
+        self.paused = False
+        self.atualizarTempo()
+            
+    def atualizarTempo(self):
+        if not self.root.running or self.paused:
+            print("Q")
+            return
+        elapsed = int(time.time() - self.root.start_time)
+        minutos = elapsed // 60
+        segundos = elapsed % 60
+        self.tempo_label.config(text=f"{minutos:02d}:{segundos:02d}")
+
+        self.time_id = self.root.after(1000, self.atualizarTempo)
+
     
     def processarResposta(self, resposta):
         if resposta == self.operador_correto:
-            self.root.pontos += 199
+            tempo_decorrido_questao = time.time() - self.iniciaTempo
+            if tempo_decorrido_questao < 20:
+                self.root.pontos += 199*10
+            else:
+                self.root.pontos += 199
+            self.root.acertos += 1
         else:
             self.root.pontos += 0
 
         self.root.continua_jogo.set(True)
-    
-    def pararJogo(self):
-        self.root.running = False
-        self.root.continua_jogo.set(True)
+   

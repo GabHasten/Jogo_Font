@@ -12,6 +12,7 @@ def janela_principal():
     root.continua_jogo = tk.BooleanVar(value=False)
     root.running = True
 
+
     def fechar_janela():
 
         if messagebox.askyesno("Confirmação","Você quer sair ?"):

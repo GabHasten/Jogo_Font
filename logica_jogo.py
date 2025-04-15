@@ -1,6 +1,6 @@
 import random as rd
 from tkinter import messagebox
-#from fim_jogo import FinalJogo
+from fim_jogo import FimJogo
 
 class DadosOperacionais:
     @staticmethod
@@ -8,6 +8,7 @@ class DadosOperacionais:
         contador = 1
         max_partidas = 20
         root.pontos = 0
+        root.acertos = 0
 
         while contador <= max_partidas:
             tela_jogo_instancia.frameTelaJogo(root,contador,root.pontos)
@@ -23,7 +24,13 @@ class DadosOperacionais:
             contador +=1
 
         if contador > max_partidas:
-            messagebox.showinfo("Fim do jogo",f"Parabéns! Você marcou {root.pontos} pontos")
+            final = FimJogo(root, pontos=root.pontos, acertos=root.acertos, partidas=max_partidas)
+            final.frameTelaFinal() 
+
+    def abrirTelaFim(self):
+        fim_jogo = FimJogo(self.root)
+        fim_jogo.frameTelaFinal()
+
 
     @staticmethod
     def iniciaPartida(count,max):
