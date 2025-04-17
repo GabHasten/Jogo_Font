@@ -8,6 +8,9 @@ def janela_principal():
     root.title("The Math Game ")
     root.geometry("800x600")
     root.resizable(False,False)
+    root.config(bg="#262626")
+    
+    
 
     root.continua_jogo = tk.BooleanVar(value=False)
     root.running = True

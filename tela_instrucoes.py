@@ -11,14 +11,18 @@ class TelaInstrucoes:
 
     def frameTelaInstrucoes(self):
         resetaTela(self.root)
-        self.root.title("The Masth Game")
+        self.root.title("The Math Game")
 
-        titulo = tk.Label(self.root, text="Instruções", font=("Arial",24))
+        titulo = tk.Label(self.root, text="Instruções", font=("Arial",24,"bold"),bg="#262626",fg="#D99748")
         titulo.pack(pady=50)
 
         texto = tk.Label(
             self.root, 
-            text="Clique na operação que corresponde ao resultados entre os dois números")
+            text="Clique na operação que corresponde ao resultados entre os dois números\nAs operações são |x| |÷| |-| |+|",
+            font=("Arial",11,"bold"),
+            bg="#262626",
+            fg="#F2EEB6"
+            )
 
         texto.pack(pady=10)
 
@@ -28,7 +32,9 @@ class TelaInstrucoes:
             command=self.abrirTelajogo,
             font=("Arial",16),
             width=10,
-            height=2
+            height=2,
+            bg="#262626",
+            fg="#D99748"
         )
         
         botao_play.pack(pady=20)

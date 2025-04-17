@@ -31,40 +31,46 @@ class TelaJogo:
         resetaTela(root)
         self.root.title("The Math Game")
         self.iniciaTempo = time.time()
+        self.root.configure(bg="#262626")
+        cabecalho = tk.Frame(root, bg="#262626")
+        numeros_frame = tk.Frame(root, bg="#262626")
+        operacoes_frame = tk.Frame(root,bg="#262626")
 
 
         self.num1, self.num2 = DadosFuncionais.gerarNumeros()
         self.operador_correto = DadosFuncionais.selecionarOperador()
         self.resultado = DadosFuncionais.calcularResultado(self.num1, self.num2, self.operador_correto)
 
-        cabecalho = tk.Frame(root)
+        cabecalho = tk.Frame(root, bg="#262626")
         cabecalho.pack(pady=10)
 
-        tk.Label(cabecalho, text="Partida:").grid(row=0, column=0, padx=10)
+        tk.Label(cabecalho, text="Partida:",bg="#262626",fg="#D99748").grid(row=0, column=0, padx=10)
         tk.Label(cabecalho, text=f"{partida_atual}/20").grid(row=0, column=1, padx=10)
 
-        tk.Label(cabecalho, text="Pontuação:").grid(row=0, column=2, padx=10)
+        tk.Label(cabecalho, text="Pontuação:",bg="#262626",fg="#D99748").grid(row=0, column=2, padx=10)
         tk.Label(cabecalho, text=str(pontos)).grid(row=0, column=3, padx=10)
 
-        tk.Label(cabecalho, text="Tempo:").grid(row=0, column=4, padx=10)
+        tk.Label(cabecalho, text="Tempo:",bg="#262626",fg="#D99748").grid(row=0, column=4, padx=10)
         self.tempo_label = tk.Label(cabecalho, text="00:00")
         self.tempo_label.grid(row=0, column=5, padx=10)
 
-        botao_parar = tk.Button(cabecalho, text="Parar", command=self.pararJogo)
+        botao_parar = tk.Button(cabecalho, text="Parar",bg="#262626",fg="#D99748", command=self.pararJogo)
         botao_parar.grid(row=0, column=6, padx=10)
 
-        numeros_frame = tk.Frame(root)
+        numeros_frame = tk.Frame(root, bg="#262626")
         numeros_frame.pack(pady=40)
-        tk.Label(numeros_frame, text=str(self.num1), font=("Arial", 32)).pack(side="left", padx=20)
-        tk.Label(numeros_frame, text="?", font=("Arial", 32)).pack(side="left", padx=20)
-        tk.Label(numeros_frame, text=str(self.num2), font=("Arial", 32)).pack(side="left", padx=20)
-        tk.Label(numeros_frame, text="=", font=("Arial", 32)).pack(side="left", padx=10)
-        tk.Label(numeros_frame, text=str(self.resultado), font=("Arial", 32)).pack(side="left", padx=10)
+        tk.Label(numeros_frame, text=str(self.num1),bg="#262626",fg="#D99748", font=("Arial", 32)).pack(side="left", padx=20)
+        tk.Label(numeros_frame, text="?",bg="#262626",fg="#D99748", font=("Arial", 32)).pack(side="left", padx=20)
+        tk.Label(numeros_frame, text=str(self.num2),bg="#262626",fg="#D99748", font=("Arial", 32)).pack(side="left", padx=20)
+        tk.Label(numeros_frame, text="=",bg="#262626",fg="#D99748", font=("Arial", 32)).pack(side="left", padx=10)
+        tk.Label(numeros_frame, text=str(self.resultado),bg="#262626",fg="#D99748", font=("Arial", 32)).pack(side="left", padx=10)
 
-        operacoes_frame = tk.Frame(root)
+        operacoes_frame = tk.Frame(root, bg="#262626")
         operacoes_frame.pack(pady=30)
 
         operadores_mapeados = {"+": "+", "-": "-", "x": "*", "÷": "/"}
+        
+        
 
         for texto_botao, operador_real in operadores_mapeados.items():
             botao = tk.Button(
@@ -73,10 +79,12 @@ class TelaJogo:
                 font=("Arial", 16),
                 width=5,
                 height=2,
+                bg="#262626",
+                fg="#D99748",
                 command=lambda op=operador_real: self.processarResposta(op)
             )
             botao.pack(side="left", padx=10)
-
+            
         rodape(self.root)
 
         self.paused = False
@@ -116,8 +124,9 @@ class TelaJogo:
         if messagebox.askyesno("Confirmação", "Você quer sair ?"):
             from tela_abertura import TelaInicial
             TelaInicial(self.root).constroiLayout()
+            self.root.destroy()
         else:
-            # ⏱️ Recalcula start_time ao voltar da pausa
+            #Recalcula start_time ao voltar da pausa
             self.root.start_time = time.time() - self.tempo_pausado
             self.paused = False
             self.atualizarTempo()

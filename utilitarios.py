@@ -5,7 +5,7 @@ def resetaTela(root):
         widget.destroy()
 
 def rodape(value):
-    rodape = tk.Label(value,text="Desenvolvido por\nGabriel Hatenreiter,Isabelle Dias e Vitoria Santos")
+    rodape = tk.Label(value,text="Desenvolvido por\nGabriel Hatenreiter,Isabelle Dias e Vitoria Santos",bg="#262626",fg="#D99748")
     rodape.pack(side="bottom",pady=10)
         
  

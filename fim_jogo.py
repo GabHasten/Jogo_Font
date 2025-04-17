@@ -14,14 +14,14 @@ class FimJogo():
         self.root.running = False
         self.root.title("The Math Game")
 
-        titulo = tk.Label(self.root, text="Fim do jogo!", font=("Arial", 24))
+        titulo = tk.Label(self.root, text="Fim do jogo!",bg="#262626",fg="#D99748", font=("Arial", 24))
         titulo.pack(pady=50)
 
         texto = tk.Label(
             self.root,
             text=f"Parabéns pela partida!\n"
-                 f"Você marcou {self.pontos} pontos e acertou {self.acertos} de {self.partidas} partidas!",
-            font=("Arial", 14)
+            f"Você marcou {self.pontos} pontos e acertou {self.acertos} de {self.partidas} Questões!",
+            font=("Arial", 14),bg="#262626",fg="#D99748"
         )
         texto.pack(pady=10)
 
@@ -31,9 +31,11 @@ class FimJogo():
             command=self.abrirTelaInstrucoes,
             font=("Arial", 16),
             width=15,
+            bg="#262626",
+            fg="#D99748",
             height=2
         )
-        botao_play.pack(pady=20)
+        botao_play.pack(pady=10)
 
         botao_sair = tk.Button(
             self.root,
@@ -41,6 +43,8 @@ class FimJogo():
             command=self.sairJogo,
             font=("Arial", 16),
             width=15,
+            bg="#262626",
+            fg="#D99748",
             height=2
         )
         botao_sair.pack(pady=10)

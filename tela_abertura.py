@@ -10,10 +10,10 @@ class TelaInicial:
 
 
     def constroiLayout(self):
-        tk.Label(self.root,text="The Math Game",font=("Arial",30)).pack()
+        tk.Label(self.root,text="The Math Game",bg="#262626",fg="#D99748",font=("Arial",30,"bold")).pack(pady=80,padx=0)
         
-        button = tk.Button(self.root,text="Play",command=self.abrirInstrucoes,font=("Arial",12))
-        button.pack(pady=10)
+        button = tk.Button(self.root,text="Play",bg="#262626",fg="#D99748",command=self.abrirInstrucoes,font=("Arial",12))
+        button.pack(padx=30,pady=10)
 
         rodape(self.root)
     
